@@ -1,13 +1,12 @@
 <template>
   <div class="doc">
-      <div class="content">
-      </div>
+    woshi doc
   </div>
 </template>
 
 <script>
 export default {
-  name: 'home',
+  name: 'doc',
   data () {
     return {
     }

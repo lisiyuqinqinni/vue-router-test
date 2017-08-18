@@ -4,13 +4,19 @@
       <img src="../assets/logo1.jpg" alt="">
     </router-link>
     <ul>
-      <li>工作台</li>
-      <li>我的项目</li>
-      <li>文档</li>
+      <router-link to="/workbench" tag="li">工作台</router-link>
+      <router-link to="/project" tag="li">我的项目</router-link>
+      <router-link to="/doc" tag="li">文档</router-link>
     </ul>
     <div class="user">
-      <span @click="loginOut">登出</span>
+      <span @click="loginOut" v-if="isLogin">登出</span>
+      <router-link to="/login" tag="span" v-if="!isLogin">登录</router-link>
     </div>
+    <div class="user-info">
+      <img v-if="isLogin" src="../assets/user.jpeg" alt="头像" style="float:right; border-radius:50%;">
+      <span  style="float:right; line-height:100px; color:#fff; font-size:14px;">{{userName}}</span>
+    </div>
+    
   </div>
 </template>
 
@@ -19,9 +25,14 @@ export default {
   name: 'header',
   data () {
     return {
+      userName: '',
+      isLogin: false
     }
   },
   created () {
+    let info = this.$local.fetch('lsy')
+    this.userName = info.userName
+    this.isLogin = info.login
   },
   methods: {
     loginOut () {
@@ -68,7 +79,7 @@ body{
   color: #fff;
   font-size: "SimSun";
   cursor: pointer;
-  padding-right: 45px;
+  padding: 0 30px;
 }
 .user span {
   padding: 5px 10px;

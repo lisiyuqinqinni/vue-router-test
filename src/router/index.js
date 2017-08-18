@@ -66,11 +66,16 @@ let router = new Router({
 })
 
 router.beforeEach((to, form, next) => {
-  if (to.meta.login) {
+  if (to.matched.some((item) => item.meta.login)) {
     if (router.app.$local.fetch('lsy').login) {
       next()
     } else {
-      router.push('/login')
+      router.push({
+        path: '/login',
+        query: {
+          redirect: to.path.slice(1)
+        }
+      })
     }
   } else {
     next()

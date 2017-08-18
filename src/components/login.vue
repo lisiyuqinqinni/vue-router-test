@@ -25,7 +25,15 @@ export default {
         login: true,
         userName: userName
       })
-      this.$router.push('/')
+      let redirect = this.$route.query.redirect
+
+      if (!redirect) {
+        redirect = 'project'
+      }
+
+      this.$router.push({
+        path: '/' + redirect
+      })
     }
   }
 }
