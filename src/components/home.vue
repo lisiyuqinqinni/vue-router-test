@@ -2,13 +2,15 @@
   <div class="home">
       <div class="nav">
         <img src="../assets/logo1.jpg"  alt="">
-        <router-link to="/" class="login" tag="div">登录</router-link>
+        <router-link v-if="!isLogin" to="/login" class="login" tag="div">登录</router-link>
+        <img v-if="isLogin" src="../assets/user.jpeg" alt="头像" style="float:right; border-radius:50%;">
+        <span  style="float:right; line-height:80px;">{{userName}}</span>
       </div>
       <div class="content">
         <h2>vue-router-test</h2>
         <div class="my">
-          <span>我的项目</span>
-          <span>我的文档</span>
+          <router-link to="/project" tag="span">我的项目</router-link>
+          <router-link to="/doc" tag="span">我的文档</router-link>
         </div>
       </div>
   </div>
@@ -18,7 +20,15 @@
 export default {
   name: 'home',
   data () {
-    return {}
+    return {
+      userName: '',
+      isLogin: false
+    }
+  },
+  created () {
+    let info = this.$local.fetch('lsy')
+    this.userName = info.userName
+    this.isLogin = info.login
   }
 }
 </script>

@@ -1,11 +1,12 @@
 <template>
   <div class="login">
       <div class="content">
-        <form>
-          <div><input type="text" maxlength="12"></div>
+        <form @submit.prevent='sendLogin' autocomplete="off">
+          <div><input type="text" maxlength="12" ref="userName"></div>
           <div><input type="password" maxlength="6"></div>
           <div><input type="submit"></div>
         </form>
+        <router-link to='/'>首页>>></router-link>
       </div>
   </div>
 </template>
@@ -15,6 +16,16 @@ export default {
   name: 'home',
   data () {
     return {
+    }
+  },
+  methods: {
+    sendLogin () {
+      let userName = this.$refs.userName.value
+      this.$local.save('lsy', {
+        login: true,
+        userName: userName
+      })
+      this.$router.push('/')
     }
   }
 }
