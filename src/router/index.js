@@ -3,10 +3,14 @@ import Router from 'vue-router'
 // import Hello from '@/components/Hello'
 import Home from '@/components/home'
 import Login from '@/components/login'
-import Layout from '@/components/layout'
+// import Layout from '@/components/layout'
 import Project from '@/components/project'
 import Workbench from '@/components/workbench'
 import Doc from '@/components/doc'
+
+let Layout = (resolve) => {
+  return import('@/components/layout')
+}
 
 Vue.use(Router)
 
